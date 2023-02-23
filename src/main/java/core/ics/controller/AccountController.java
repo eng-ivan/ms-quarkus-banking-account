@@ -25,6 +25,7 @@ public class AccountController {
     @Path(value = "/account/save")
     @Transactional
     public Response save(){
+        log.info("create account {}", accountService.save());
         return Response
                 .status(Response.Status.CREATED)
                 .location(URI.create("/api/account/save"))
@@ -35,7 +36,7 @@ public class AccountController {
     @GET
     @Path(value = "/account/{id}")
     public Response findByID(@PathParam("id") String id){
-
+        log.info("find account by ID {}", id);
         return Response
                 .status(Response.Status.OK)
                 .entity(accountService.findByID(id))
@@ -45,7 +46,7 @@ public class AccountController {
     @GET
     @Path(value = "/account/list")
     public Response list(){
-
+        log.info("list accounts {}", accountService.list());
         return Response
                 .status(Response.Status.OK)
                 .entity(accountService.list())
