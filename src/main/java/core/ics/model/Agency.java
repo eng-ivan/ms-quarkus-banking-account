@@ -1,4 +1,4 @@
-package core.ics.dto;
+package core.ics.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,17 +7,14 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @SuperBuilder
-public class AccountDTO implements Serializable {
+public class Agency implements Serializable {
 
     Long id;
     String agency;
-    String account;
-    LocalDateTime createAt;
 }

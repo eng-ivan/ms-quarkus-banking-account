@@ -2,6 +2,7 @@ package core.ics.service;
 
 import core.ics.model.Account;
 import core.ics.repository.AccountRepository;
+import core.ics.utils.ValidationParameter;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -19,5 +20,10 @@ public class AccountService {
                 .listAll()
                 .stream()
                 .collect(Collectors.toList());
+    }
+
+    public Account findByID(String id){
+        Long index = ValidationParameter.validate(id);
+        return accountRepository.findById(index);
     }
 }
