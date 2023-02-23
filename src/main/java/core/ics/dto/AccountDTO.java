@@ -1,5 +1,7 @@
 package core.ics.dto;
 
+import core.ics.model.Account;
+import core.ics.model.Agency;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,4 +22,9 @@ public class AccountDTO implements Serializable {
     String agency;
     String account;
     LocalDateTime createAt;
+
+    public AccountDTO(Account account){
+        this.agency = account.getAgency();
+        this.account = account.getAccount();
+    }
 }
