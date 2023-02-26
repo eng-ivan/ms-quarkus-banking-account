@@ -53,7 +53,7 @@ jobs:
        docker run -d --name=nginx -p 80:80 nginx:latest
       
   tests:
-    needs: [build]
+    needs: [QA-Test]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -62,7 +62,7 @@ jobs:
       run: mvn clean verify -DskipTests=true
 
   deploy:
-    needs: [build]
+    needs: [tests]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -71,3 +71,17 @@ jobs:
       run: |
        mvn clean install -DskipTests=true
        mvn package -DskipTests=true
+   
+  docker-hub:
+      needs: [deploy]
+      runs-on: [ubuntu-latest]
+      steps:
+       - name: Build Deploy Docker Hub
+         uses: mr-smithers-excellent/docker-build-push@v5
+         with: 
+            image: devmenorzera/ms-quarkus-banking-account
+            tags: latest
+            registry: docker.io
+            dockerfile: Dockerfile
+            username: ${{ secrets.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_PASSWORD }}
