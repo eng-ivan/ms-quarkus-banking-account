@@ -1,4 +1,4 @@
-name: Java CI with Maven
+name: Build Tests And Deploy Application
 
 on:
   push:
@@ -6,6 +6,13 @@ on:
 
 jobs:
 
+  setup:
+   runs-on: [ubuntu-latest]
+   steps:
+     - uses: roles-ansible/check-ansible-ubuntu-latest-action@0.4.1
+     - name: Check Ubuntu Latest
+       run: apt-get update && apt-get upgrade -y
+       
   build:
     runs-on: ubuntu-latest
     steps:
@@ -20,12 +27,14 @@ jobs:
       run: mvn -B package --file pom.xml
   
   tests:
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
     - name: Test Application
       run: mvn clean verify -DskipTests=true
 
   deploy:
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
     - name: Deploy Application 
