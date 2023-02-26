@@ -77,9 +77,11 @@ jobs:
       runs-on: [ubuntu-latest]
       steps:
        - name: Build Deploy Docker Hub
-         uses: mr-smithers-excellent/docker-build-push@v5
+         uses: docker/build-push-action@v4.0.0
          with: 
             image: devmenorzera/ms-quarkus-banking-account
+            context: .
+            file: .
             tags: latest
             registry: docker.io
             dockerfile: Dockerfile
