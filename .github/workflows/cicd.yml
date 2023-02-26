@@ -2,17 +2,10 @@ name: Build Tests And Deploy Application
 
 on:
   push:
-    branches: [ master, develop]
+    branches: [ master, develop ]
 
 jobs:
 
-  setup:
-   runs-on: [ubuntu-latest]
-   steps:
-     - uses: roles-ansible/check-ansible-ubuntu-latest-action@0.4.1
-     - name: Check Ubuntu Latest
-       run: apt-get update && apt-get upgrade -y
-       
   build:
     runs-on: ubuntu-latest
     steps:
@@ -24,7 +17,22 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn -B package -DskipTests=true --file pom.xml
+    
+  builder-verify:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+     - name: list Directories
+       run: ls -lha
+     - name: Show Java Version
+       run: java --version
+     - name: Show Maven Version
+       run: mvn --version  
+     - name: Show Git Version
+       run: git --version
+     - name: Build with Maven
+       run: mvn -B package -DskipTests=true --file pom.xml
   
   tests:
     needs: [build]
@@ -38,4 +46,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Deploy Application 
-      run: mvn clean package
+      run: mvn clean install -DskipTests=true
