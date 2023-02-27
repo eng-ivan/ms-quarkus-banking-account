@@ -1,7 +1,6 @@
 package core.ics.dto;
 
 import core.ics.model.Account;
-import core.ics.model.Agency;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
