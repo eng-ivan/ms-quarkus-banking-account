@@ -48,7 +48,7 @@ jobs:
     
     - name: Test Application
       run: |
-       mvn compile quarkus:test
+       mvn clean install
        ls -lha
        curl https://viacep.com.br/ws/13033035/json/
       
