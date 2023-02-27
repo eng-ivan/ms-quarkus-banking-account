@@ -1,6 +1,4 @@
 package core.ics;
-
-import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
 import org.testcontainers.containers.PostgreSQLContainer;
 
@@ -8,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-//@QuarkusTestResource(InitializerTestContainers.class)
 public class InitializerTestContainers implements QuarkusTestResourceLifecycleManager {
 
     private PostgreSQLContainer postgreSQLContainer;

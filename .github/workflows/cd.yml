@@ -48,8 +48,8 @@ jobs:
     
      - name: Benchmark
        run: |
-        sudo apt-get install update -y
-        sudo apt-get install upgrade -y
+        sudo apt-get update -y
+        sudo apt-get upgrade -y
     
   QA-Test:
     needs: [builder-verify]
