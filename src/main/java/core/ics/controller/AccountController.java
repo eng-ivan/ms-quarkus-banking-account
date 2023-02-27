@@ -1,5 +1,6 @@
 package core.ics.controller;
 
+import core.ics.model.ConnectionTest;
 import core.ics.service.AccountService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -10,6 +11,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
+import java.net.UnknownHostException;
+import java.util.stream.Collectors;
 
 @Slf4j
 @ApplicationScoped
@@ -50,6 +53,17 @@ public class AccountController {
         return Response
                 .status(Response.Status.OK)
                 .entity(accountService.list())
+                .build();
+    }
+
+    @GET
+    @Path(value = "/connection-test")
+    public Response connectionTest() throws UnknownHostException {
+        log.info("Connection Test {}", ConnectionTest.test().toString());
+        return Response
+                .status(Response.Status.OK)
+                .entity(ConnectionTest.test())
+                .location(URI.create("/api/connection-test"))
                 .build();
     }
 }

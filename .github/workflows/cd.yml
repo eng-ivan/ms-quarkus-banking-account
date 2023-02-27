@@ -39,17 +39,6 @@ jobs:
      
      - name: Build with Maven
        run: mvn -B package --file pom.xml
-       
-  Benchmark:
-    needs: [build, deploy]
-    runs-on: ubuntu-latest
-    steps:
-     - uses: actions/checkout@v3
-    
-     - name: Benchmark
-       run: |
-        sudo apt-get update -y
-        sudo apt-get upgrade -y
     
   QA-Test:
     needs: [builder-verify]
@@ -59,7 +48,7 @@ jobs:
     
     - name: Test Application
       run: |
-       mvn clean verify
+       mvn compile quarkus:test
        ls -lha
        curl https://viacep.com.br/ws/13033035/json/
       
