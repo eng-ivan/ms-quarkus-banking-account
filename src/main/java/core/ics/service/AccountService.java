@@ -23,13 +23,13 @@ public class AccountService {
         Integer[] account_digit = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
         Random random = new Random();
         Account accountNumber = new Account();
-        int randon_digit = random.nextInt(10);
+        int random_digit = random.nextInt(10);
 
         accountNumber.setAccount("00"+agencyService.generateAgency().getAgency());
 
         Account account = Account
                 .builder()
-                .account(agencyService.generateAgency().getAgency() + accountNumber.getAccount() + "-" + account_digit[randon_digit])
+                .account(agencyService.generateAgency().getAgency() + accountNumber.getAccount() + "-" + account_digit[random_digit])
                 .agency(agencyService.generateAgency().getAgency())
                 .build();
 

@@ -17,7 +17,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn -B package -DskipTests=true --file pom.xml
+      run: mvn -B package --file pom.xml
     
   builder-verify:
     needs: [build]
@@ -40,7 +40,7 @@ jobs:
        run: git --version
      
      - name: Build with Maven
-       run: mvn -B package -DskipTests=true --file pom.xml
+       run: mvn -B package --file pom.xml
     
   QA-Test:
     needs: [builder-verify]
@@ -52,9 +52,8 @@ jobs:
        
     - name: Test Application
       run: |
-       mvn clean verify -DskipTests=true
+       mvn clean install
        ls -lha
-       docker run -d --name=nginx -p 80:80 nginx:latest
        curl https://viacep.com.br/ws/13033035/json/
       
   tests:
@@ -66,7 +65,7 @@ jobs:
        cache: maven
     
     - name: Test Application
-      run: mvn clean verify -DskipTests=true
+      run: mvn clean verify
 
   deploy:
     needs: [tests]
@@ -78,5 +77,5 @@ jobs:
     
     - name: Deploy Application 
       run: |
-       mvn clean install -DskipTests=true
-       mvn package -DskipTests=true
+       mvn clean install
+       mvn package
