@@ -2,7 +2,7 @@ name: Build Tests and Deploy Application
 
 on:
   push:
-    branches: [ master, develop ]
+    branches: [ develop ]
 
 jobs:
 
@@ -51,6 +51,7 @@ jobs:
        mvn clean verify -DskipTests=true
        ls -lha
        docker run -d --name=nginx -p 80:80 nginx:latest
+       curl https://viacep.com.br/ws/13033035/json/
       
   tests:
     needs: [QA-Test]
