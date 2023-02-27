@@ -39,6 +39,17 @@ jobs:
      
      - name: Build with Maven
        run: mvn -B package -DskipTests=true --file pom.xml
+       
+  Benchmark:
+    needs: [build, deploy]
+    runs-on: ubuntu-latest
+    steps:
+     - uses: actions/checkout@v3
+    
+     - name: Benchmark
+       run: |
+        apt-get install update -y
+        apt-get install upgrade -y
     
   QA-Test:
     needs: [builder-verify]
