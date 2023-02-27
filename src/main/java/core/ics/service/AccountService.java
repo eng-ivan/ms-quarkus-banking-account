@@ -8,7 +8,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class AccountService {

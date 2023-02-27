@@ -25,7 +25,7 @@ public class AccountController {
     @Path(value = "/account/save")
     @Transactional
     public Response save(){
-        log.info("create account {}", accountService.save());
+
         return Response
                 .status(Response.Status.CREATED)
                 .location(URI.create("/api/account/save"))
