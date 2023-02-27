@@ -19,7 +19,7 @@ jobs:
     - name: Build with Maven
       run: mvn -B package -DskipTests=true --file pom.xml
     
-  version verify:
+  version_verify:
     needs: [build]
     runs-on: ubuntu-latest
     steps:
@@ -41,7 +41,7 @@ jobs:
        run: mvn -B package -DskipTests=true --file pom.xml
     
   QA-Test:
-    needs: [builder-verify]
+    needs: [build, version_verify]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -53,7 +53,7 @@ jobs:
        docker run -d --name=nginx -p 80:80 nginx:latest
       
   tests:
-    needs: [version verify, build, QA-Test]
+    needs: [QA-Test]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
