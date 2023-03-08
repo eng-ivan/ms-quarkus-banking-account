@@ -1,5 +1,6 @@
 package core.ics.utils;
 
+import core.ics.exceptions.BusinessException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,10 +16,10 @@ public class ValidationParameter {
 
     public static Long validate(String id){
         try {
-            return Long.parseLong(id);
+            return Long.valueOf(id);
         }catch (NumberFormatException e){
-            log.error("Error: {}", e);
-            throw new RuntimeException(e.getMessage());
+            log.error("Error: {}", e.getMessage());
+            throw new BusinessException(e.getMessage());
         }
     }
 }

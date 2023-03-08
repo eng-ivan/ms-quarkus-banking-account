@@ -6,6 +6,7 @@ import core.ics.utils.ValidationParameter;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -39,7 +40,7 @@ public class AccountService {
     }
 
     public List<Account> list(){
-        return accountRepository.listAll();
+        return new ArrayList<>(accountRepository.listAll());
     }
 
     public Account findByID(String value){
