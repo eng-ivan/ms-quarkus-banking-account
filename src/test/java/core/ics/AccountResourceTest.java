@@ -14,7 +14,7 @@ import static javax.ws.rs.core.Response.Status.NOT_FOUND;
 import static javax.ws.rs.core.Response.Status.OK;
 
 @QuarkusTest
-@QuarkusTestResource(InitializerTestContainers.class)
+//@QuarkusTestResource(InitializerTestContainers.class)
 public class AccountResourceTest {
 
     @Test
